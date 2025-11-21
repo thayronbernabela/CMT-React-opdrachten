@@ -1,12 +1,27 @@
-import './App.css'
+import "./App.css";
+import Layout from "./components/Layout";
+import Navigation from "./Pages/Navigation";
+import Home from "./Pages/Home";
+import About from "./Pages/About";
+import Contact from "./Pages/Contact";
+import NoPage from "./Pages/NoPage";
+import { Routes, Route } from "react-router-dom";
 
 function App() {
-
   return (
     <>
-      <h1>Opdracht 1 - Books</h1>
+      <Navigation />
+
+      <Layout>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/contact" element={<Contact />} />
+          <Route path="*" element={<NoPage />} />
+        </Routes>
+      </Layout>
     </>
-  )
+  );
 }
 
-export default App
+export default App;

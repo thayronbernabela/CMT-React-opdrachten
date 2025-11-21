@@ -1,12 +1,13 @@
-import './App.css'
+import "./App.css";
+import MenuList from "./components/MenuList";
 
 function App() {
-
   return (
-    <>
-      <h1>Opdracht 4 - Menu</h1>
-    </>
-  )
+    <div className="App">
+      <h1>Ons menu</h1>
+      <MenuList />
+    </div>
+  );
 }
 
-export default App
+export default App;

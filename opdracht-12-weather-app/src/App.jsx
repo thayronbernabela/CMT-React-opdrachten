@@ -1,50 +1,25 @@
 import './App.css'
-import { useState, useEffect } from 'react';
-import WeatherInfo from './components/WeatherInfo';
 
 function App() {
- const [weather, setWeather] = useState();
- const [city, setCity] = useState('oslo')
- const [input, setInput] = useState('')
 
- const apiKey = "653685a1a12b47f3cb252e46696f9f24"
-
-  useEffect(() => {
-    
-    const fetchWeather = async () => {
-      try {
-        const response = await fetch(
-          `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`
-        );
-        const weatherData = await response.json();
-        console.log(weatherData)
-        setWeather(weatherData);
-      } catch (error) {
-        console.error('Error fetching weather:', error);
-      }
-    };
-
-    fetchWeather();
-  }, [city]); 
-  function inputHandler(e) {
-    e.preventDefault();
-    setCity(input);
-  }
   return (
-    <div>
-      <input type="text" onChange={(e) => setInput(e.target.value)} />
-      <button onClick={inputHandler}>zoek</button>
-      {weather ? (
-       <WeatherInfo city={weather.name} temp={weather.main.temp} feels={weather.main.feels_like} humidity={weather.main.humidity} wind={weather.wind.speed}  />
+    <>
+      <section className='mx-auto w-1/2'>
+        <section className='w-48 '>
+          <div className='flex'>
+            <img src="/img/foto2.png" alt="Workcation" />
+            <h1>Work<span className='text-violet-300'>cation</span></h1>
+          </div>
+         <img className='w-64' src="/img/foto.png" alt="Workcation" />
+          <h2 className='text-2xl font-bold'>you can work form anywhere. <span className='text-violet-300'>take advantage of it</span></h2>
+          <p>workation helps you find work-friendly rentals in beautiful locations so you can enjoy some nice weather even when your not on vacation</p>
 
-  ) : (
-         <p>Het weer is aan het laden</p>
-      )}
-    </div>
+          <button className='bg-violet-300'>Book your escape</button>
 
-    );
-  
-};
-
+        </section>
+      </section>
+    </>
+  )
+}
 
 export default App

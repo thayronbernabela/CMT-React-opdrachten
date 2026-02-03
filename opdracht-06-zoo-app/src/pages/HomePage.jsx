@@ -1,19 +1,51 @@
-import animals from "../animals";
-import Animal from "../components/Animal";
-import "./HomePage.css";
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import animals from '../animals.js';
+import Card from '../components/card.jsx';
 
-function HomePage() {
+const Home = () => {
+
+  const navigate = useNavigate();
+  const [animalList, setAnimalList] = useState(animals);
+  const [searchInput, setsearchInput] = useState('');
+
+  const goToDetail = (animalId) => {
+    navigate(`/animals/${animalId}`);
+  };
+
+  const searchHandler = (e) => {
+    let newSearch = e.target.value;
+    setsearchInput(newSearch);
+
+    const filteredAnimals = animals.filter((animal) =>
+      animal.name.toLowerCase().includes(searchInput.toLowerCase())
+    );
+
+    setAnimalList(filteredAnimals);
+  };
+
   return (
-    <div className="home-container">
-      <h1 className="home-title">Zoo App</h1>
-
-      <div className="animals-grid">
-        {animals.map((animal) => (
-          <Animal key={animal.id} animal={animal} />
-        ))}
+    <>
+      <div>
+        <input 
+          type="text" 
+          placeholder="zoek hier uw dier" 
+          name="search" 
+          onChange={searchHandler}
+        />
       </div>
-    </div>
-  );
-}
 
-export default HomePage;
+      <section className="container">
+        {animalList.map((animal) => (
+          <Card
+            key={animal.id}
+            animals={animal}
+            onShowDetail={goToDetail}
+          />
+        ))}
+      </section>
+    </>
+  );
+};
+
+export default Home;

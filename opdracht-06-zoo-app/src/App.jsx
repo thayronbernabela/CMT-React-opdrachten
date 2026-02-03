@@ -1,16 +1,16 @@
-import "./App.css";
-import { Routes, Route } from "react-router-dom";
-import HomePage from "./pages/HomePage";
-import DetailPage from "./pages/DetailPage";
+import './app.css';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import Home from './Pages/HomePage';
+import DetailPage from './Pages/DetailPage';
 
 function App() {
   return (
-    <>
+    <BrowserRouter>
       <Routes>
-        <Route path="/" element={<HomePage />} />
-        <Route path="/animal/:id" element={<DetailPage />} />
+        <Route path="/" element={<Home />} />
+        <Route path="/animals/:animalId" element={<DetailPage />} />
       </Routes>
-    </>
+    </BrowserRouter>
   );
 }
 

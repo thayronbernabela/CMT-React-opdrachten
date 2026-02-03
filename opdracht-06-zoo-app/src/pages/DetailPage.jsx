@@ -1,40 +1,30 @@
-import { useParams, useNavigate } from "react-router-dom";
-import animals from "../animals";
-import "./DetailPage.css";
+import { useState } from 'react';
+import { useParams, useNavigate } from 'react-router-dom';
+import animals from '../animals.js';
 
-function DetailPage() {
-  const { id } = useParams();
+const AnimalDetail = () => {
+  const { animalId } = useParams();
   const navigate = useNavigate();
-
-  const animal = animals.find((a) => a.id === Number(id));
+  const [animalList, setAnimalList] = useState(animals);
+  
+  // Zoek het juiste product
+  const animal = animalList.find(p => p.id === Number(animalId));
 
   if (!animal) {
-    return <h2>Dier niet gevonden</h2>;
+    return <div>Product niet gevonden!</div>;
   }
 
   return (
-    <div className="detail-container">
-      <img src={animal.image} alt={animal.name} className="detail-img" />
-
-      <h1 className="detail-title">{animal.name}</h1>
-
-      <p className="detail-info">
-        <strong>Leefomgeving:</strong> {animal.habitat}
-      </p>
-
-      <p className="detail-info">
-        <strong>Dieet:</strong> {animal.diet}
-      </p>
-
-      <p className="detail-description">
-        Beschrijving: {animal.description}
-      </p>
-
-      <button className="back-btn" onClick={() => navigate(-1)}>
-        Terug
+    <section>
+      <button onClick={() => navigate('/')}>
+        ← Terug naar home
       </button>
-    </div>
+      
+      <h1>{animal.name}</h1>
+      <img src={animal.imageUrl} alt="" />
+      <p>Beschrijving: {animal.description}</p>
+    </section>
   );
-}
+};
 
-export default DetailPage;
+export default AnimalDetail;

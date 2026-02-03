@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState } from 'react';
 
-function Clock() {
+const Clock = () => {
   const [currentTime, setCurrentTime] = useState(new Date());
 
   useEffect(() => {
@@ -8,10 +8,11 @@ function Clock() {
       setCurrentTime(new Date());
     }, 1000);
 
+    
     return () => clearInterval(intervalId);
   }, []);
 
-  return (<p>{currentTime.toLocaleTimeString("nl-NL")}</p>);
-}
+  return <h2>{currentTime.toLocaleTimeString()}</h2>;
+};
 
 export default Clock;
